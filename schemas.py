@@ -1,3 +1,5 @@
+from datetime import date
+
 from enum import Enum
 from pydantic import BaseModel
 
@@ -12,4 +14,8 @@ class Band(BaseModel):
     id: int
     name: str
     genre: str
-    
+    albums: list['Album'] = []
+
+class Album(BaseModel):
+    title: str
+    release_date: date
