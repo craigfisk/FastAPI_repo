@@ -9,12 +9,23 @@ class GenreURLChoices(Enum):
     METAL = 'metal'
     HIP_HOP = 'hip-hop' 
 
-class Band(BaseModel):
-    #     {"id": 1, 'name': 'The Kinks', 'genre': 'Rock'},  
-    id: int
+# class Band(BaseModel):
+#     #     {"id": 1, 'name': 'The Kinks', 'genre': 'Rock'},  
+#     id: int
+#     name: str
+#     genre: str
+#     albums: list['Album'] = []
+
+class BandBase(BaseModel):
     name: str
     genre: str
     albums: list['Album'] = []
+
+class BandCreate(BandBase):
+    pass
+
+class BandWithID(BandBase):
+    id: int
 
 class Album(BaseModel):
     title: str
