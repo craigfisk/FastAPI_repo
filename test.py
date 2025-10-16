@@ -1,8 +1,8 @@
 from typing import Annotated
 
-def double(x: int)-> int:
+def double(x: Annotated[int, (0,100)])-> int:
     return x * 2
 
-result = double(4)
+result = double(101)
 print(result)
 
