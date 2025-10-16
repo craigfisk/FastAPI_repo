@@ -5,3 +5,6 @@ Content-Type: application/json
     "name": "Boards of Canada",
     "genre": "Electronic"
 }
+
+###
+GET http://localhost:8000/bands/
