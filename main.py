@@ -22,7 +22,7 @@ async def bands(
 
     if genre:
         band_list = [
-            b for b in band_list if b.genre.lower() == genre.value
+            b for b in band_list if b.genre.value.lower() == genre.value
         ]
     
     if has_albums:
