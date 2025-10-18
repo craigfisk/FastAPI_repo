@@ -16,7 +16,8 @@ BANDS = [
 @app.get('/bands')
 async def bands(
     genre: GenreURLChoices | None = None,
-    has_albums: bool = False,
+    q: Annotated[str | None, Query(max_length=10)] = None,
+    # has_albums: bool = False,
 ) -> list[BandWithID]:
     band_list = [BandWithID(**b) for b in BANDS]
 
@@ -25,8 +26,12 @@ async def bands(
             b for b in band_list if b.genre.value.lower() == genre.value
         ]
     
-    if has_albums:
-        band_list = [b for b in band_list if len(b.albums) > 0]
+    if q:
+        band_list = [
+            b for b in band_list if q.lower() in b.name.lower()
+        ]   
+    # if has_albums:
+    #     band_list = [b for b in band_list if len(b.albums) > 0]
     return band_list 
 
 @app.get('/bands/{band_id}')  
