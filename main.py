@@ -13,6 +13,8 @@ BANDS = [
     {"id": 4, 'name': 'Wu-Tang Clan', 'genre': 'Hip-Hop'},    
 ]
 
+#  start checking from here
+
 @app.get('/bands')
 async def bands(
     genre: GenreURLChoices | None = None,
@@ -23,7 +25,7 @@ async def bands(
 
     if genre:
         band_list = [
-            b for b in band_list if b.genre.value.lower() == genre.value
+            b for b in band_list if q.lower() in b.name.lower()
         ]
     
     if q:
