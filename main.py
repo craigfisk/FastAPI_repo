@@ -19,13 +19,12 @@ BANDS = [
 async def bands(
     genre: GenreURLChoices | None = None,
     q: Annotated[str | None, Query(max_length=10)] = None,
-    # has_albums: bool = False,
 ) -> list[BandWithID]:
     band_list = [BandWithID(**b) for b in BANDS]
 
     if genre:
         band_list = [
-            b for b in band_list if q.lower() in b.name.lower()
+            b for b in band_list if b.genre.value.lower() == genre.value
         ]
     
     if q:
