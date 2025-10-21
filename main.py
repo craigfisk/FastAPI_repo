@@ -13,11 +13,12 @@ BANDS = [
     {"id": 4, 'name': 'Wu-Tang Clan', 'genre': 'Hip-Hop'},    
 ]
 
+#  start checking from here
+
 @app.get('/bands')
 async def bands(
     genre: GenreURLChoices | None = None,
     q: Annotated[str | None, Query(max_length=10)] = None,
-    # has_albums: bool = False,
 ) -> list[BandWithID]:
     band_list = [BandWithID(**b) for b in BANDS]
 

@@ -4,24 +4,32 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        {"name":"Python Debugger: FastAPI","type":"debugpy","request":"launch","module":"uvicorn","args":["main:app","--reload"],"jinja":true},
+
         {
             "name": "FastAPI (Uvicorn)",
-            "type": "debugpy",
-            "request": "launch",
+            "type": "debugpy", // essentially means: "Use the Microsoft Python Debugger."
+            "request": "launch", // vs. "attach"
             "module": "uvicorn",
             "args": [
-                "main:app", // Replace 'main' with your file name and 'app' with your FastAPI instance variable name
-                "--reload",
+                "main:app", // ArjanCodes "src.main:app"
+                // ArjanCodes has "--reload" but Gemini says to leave out   
                 "--host",
                 "0.0.0.0",
                 "--port",
                 "8000"
             ],
-            "jinja": true,
-            "justMyCode": true,
+            "jinja": true, //ArjanCodes: "jinja": false
+            "justMyCode": true, //essentially tells the debugger: "Only project files, ignore library and framework.
+            "cwd": "${workspaceFolder}",  // Ensure this is set to your workspace folder. 
+            // If you encounter errors like "ModuleNotFoundError: No module named 'main'" or the debugger simply 
+            // fails to start your application, adding or verifying the "cwd": "${workspaceFolder}" setting is 
+            // usually the first step to fix it.
             "env": {
                 "PYTHONUNBUFFERED": "1"
-            }
+            } // For web servers like Uvicorn, which rely on continuous output to the console, ensuring the stream 
+            // is unbuffered helps maintain a stable connection and reliable logging in the DEBUG CONSOLE.
+            // ArjanCode: "envFile": "${workspaceFolder}/src/.env"
         }
     ]
 }
